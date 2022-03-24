@@ -28,11 +28,13 @@ namespace StickersTemplate.Tests
     using Mutex = System.Threading.Mutex;
     using Task = System.Threading.Tasks.Task;
     using CancellationToken = System.Threading.CancellationToken;
+    using System.Net.Http;
 
     [ExcludeFromCodeCoverage]
     [TestClass]
     public class MessagesHttpFunctionTests
     {
+        private static HttpClient httpClient = new HttpClient();
         private readonly Mutex sequentialMutex = new Mutex(true, "ForceSequentialTests");
 
         private readonly StickerSet stickerSet = new StickerSet("stickers", new Sticker[] {
@@ -481,7 +483,7 @@ namespace StickersTemplate.Tests
             settings.Setup((s) => s.MicrosoftAppId).Returns(Guid.NewGuid().ToString());
 
             var stickerSetRepository = new Mock<IStickerSetRepository>();
-            stickerSetRepository.Setup((s) => s.FetchStickerSetAsync(It.IsAny<CancellationToken>()))
+            stickerSetRepository.Setup((s) => s.FetchStickerSetAsync(httpClient, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(stickerSet);
 
             stickerSetIndexerMock = new Mock<IStickerSetIndexer>();

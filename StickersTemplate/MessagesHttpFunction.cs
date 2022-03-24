@@ -11,6 +11,7 @@ namespace StickersTemplate
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
+    using System.Net.Http;
     using System.Threading.Tasks;
     using Microsoft.ApplicationInsights;
     using Microsoft.ApplicationInsights.Extensibility;
@@ -35,6 +36,7 @@ namespace StickersTemplate
     /// </summary>
     public class MessagesHttpFunction
     {
+        private static HttpClient httpClient = new HttpClient();
         private readonly TelemetryClient telemetryClient;
         private readonly ISettings settings;
         private readonly IStickerSetRepository stickerSetRepository;
@@ -160,7 +162,7 @@ namespace StickersTemplate
                 }
 
                 // Find matching stickers
-                var stickerSet = await stickerSetRepository.FetchStickerSetAsync();
+                var stickerSet = await stickerSetRepository.FetchStickerSetAsync(httpClient);
                 await stickerSetIndexer.IndexStickerSetAsync(stickerSet);
                 var stickers = await stickerSetIndexer.FindStickersByQuery(query, skip, count);
 

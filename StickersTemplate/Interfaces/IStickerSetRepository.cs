@@ -6,6 +6,7 @@
 
 namespace StickersTemplate.Interfaces
 {
+    using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
     using StickersTemplate.Models;
@@ -18,8 +19,9 @@ namespace StickersTemplate.Interfaces
         /// <summary>
         /// Returns a <see cref="StickerSet"/> object.
         /// </summary>
+        /// <param name="httpClient"> httpclient</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>The resulting <see cref="StickerSet"/> if one was found. Null otherwise.</returns>
-        Task<StickerSet> FetchStickerSetAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<StickerSet> FetchStickerSetAsync(HttpClient httpClient, CancellationToken cancellationToken = default(CancellationToken));
     }
 }

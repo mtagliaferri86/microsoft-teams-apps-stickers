@@ -39,7 +39,7 @@ namespace StickersTemplate.Providers
         }
 
         /// <inheritdoc />
-        public async Task<StickerSet> FetchStickerSetAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<StickerSet> FetchStickerSetAsync(HttpClient httpClient, CancellationToken cancellationToken = default)
         {
             using (var scope = this.logger.BeginScope($"{nameof(StickerSetRepository)}.{nameof(this.FetchStickerSetAsync)}"))
             {
@@ -50,8 +50,6 @@ namespace StickersTemplate.Providers
                     return DefaultStickerSet;
                 }
 
-                using (var httpClient = new HttpClient())
-                {
                     var response = await httpClient.GetAsync(configUri);
                     if (!response.IsSuccessStatusCode)
                     {
@@ -71,7 +69,6 @@ namespace StickersTemplate.Providers
                         this.logger.LogError(e, $"Response from GET {configUri} could not be parsed properly; default sticker set will be used.");
                         return DefaultStickerSet;
                     }
-                }
             }
         }
     }
