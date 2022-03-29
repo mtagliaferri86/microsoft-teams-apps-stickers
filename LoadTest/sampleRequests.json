@@ -1,0 +1,186 @@
+[{
+        "name": "composeExtension/query",
+        "value": {
+            "commandId": "search",
+            "parameters": [{
+                "name": "keyword",
+                "value": "Aruba"
+            }],
+            "queryOptions": {
+                "skip": 0,
+                "count": 25
+            }
+        },
+        "type": "invoke",
+        "timestamp": "2017-05-01T15:45:51.876Z",
+        "localTimestamp": "2017-05-01T08:45:51.876-07:00",
+        "id": "f:622749630322482883",
+        "channelId": "msteams",
+        "serviceUrl": "https://smba.trafficmanager.net/amer-client-ss.msg/",
+        "from": {
+            "id": "29:1C7dbRrC_5yzN1RGtZIrcWT0xz88KPGP9sxdpVpV8sODlgPHeQE9RqQ02hnpuKzy6zZ-AaZx6swUOMj_Dsdse3TQ4sIaeebbFBF-VgjJy_nY",
+            "name": "Larry Jin",
+            "aadObjectId": "cd723fa0-0591-416a-9290-e93ecf3a9b92"
+        },
+        "conversation": {
+            "id": "19:skypespaces_8198cfe0dd2647ae91930f0974768a40@thread.skype"
+        },
+        "recipient": {
+            "id": "28:b4922ea1-5315-4fd0-9b21-d941ab06e39f",
+            "name": "TheComposeExtensionDev"
+        },
+        "entities": [{
+            "type": "clientInfo",
+            "country": "US",
+            "platform": "Windows"
+        }]
+    },
+    {
+        "name": "composeExtension/query",
+        "value": {
+            "commandId": "search",
+            "parameters": [{
+                "name": "keyword",
+                "value": "spid"
+            }],
+            "queryOptions": {
+                "skip": 0,
+                "count": 25
+            }
+        },
+        "type": "invoke",
+        "timestamp": "2017-05-01T15:45:51.876Z",
+        "localTimestamp": "2017-05-01T08:45:51.876-07:00",
+        "id": "f:622749630322482883",
+        "channelId": "msteams",
+        "serviceUrl": "https://smba.trafficmanager.net/amer-client-ss.msg/",
+        "from": {
+            "id": "29:1C7dbRrC_5yzN1RGtZIrcWT0xz88KPGP9sxdpVpV8sODlgPHeQE9RqQ02hnpuKzy6zZ-AaZx6swUOMj_Dsdse3TQ4sIaeebbFBF-VgjJy_nY",
+            "name": "Larry Jin",
+            "aadObjectId": "cd723fa0-0591-416a-9290-e93ecf3a9b92"
+        },
+        "conversation": {
+            "id": "19:skypespaces_8198cfe0dd2647ae91930f0974768a40@thread.skype"
+        },
+        "recipient": {
+            "id": "28:b4922ea1-5315-4fd0-9b21-d941ab06e39f",
+            "name": "TheComposeExtensionDev"
+        },
+        "entities": [{
+            "type": "clientInfo",
+            "country": "US",
+            "platform": "Windows"
+        }]
+    },
+    {
+        "name": "composeExtension/query",
+        "value": {
+            "commandId": "search",
+            "parameters": [{
+                "name": "keyword",
+                "value": "idp"
+            }],
+            "queryOptions": {
+                "skip": 0,
+                "count": 25
+            }
+        },
+        "type": "invoke",
+        "timestamp": "2017-05-01T15:45:51.876Z",
+        "localTimestamp": "2017-05-01T08:45:51.876-07:00",
+        "id": "f:622749630322482883",
+        "channelId": "msteams",
+        "serviceUrl": "https://smba.trafficmanager.net/amer-client-ss.msg/",
+        "from": {
+            "id": "29:1C7dbRrC_5yzN1RGtZIrcWT0xz88KPGP9sxdpVpV8sODlgPHeQE9RqQ02hnpuKzy6zZ-AaZx6swUOMj_Dsdse3TQ4sIaeebbFBF-VgjJy_nY",
+            "name": "Larry Jin",
+            "aadObjectId": "cd723fa0-0591-416a-9290-e93ecf3a9b92"
+        },
+        "conversation": {
+            "id": "19:skypespaces_8198cfe0dd2647ae91930f0974768a40@thread.skype"
+        },
+        "recipient": {
+            "id": "28:b4922ea1-5315-4fd0-9b21-d941ab06e39f",
+            "name": "TheComposeExtensionDev"
+        },
+        "entities": [{
+            "type": "clientInfo",
+            "country": "US",
+            "platform": "Windows"
+        }]
+    },
+    {
+        "name": "composeExtension/query",
+        "value": {
+            "commandId": "search",
+            "parameters": [{
+                "name": "keyword",
+                "value": "intesa"
+            }],
+            "queryOptions": {
+                "skip": 0,
+                "count": 25
+            }
+        },
+        "type": "invoke",
+        "timestamp": "2017-05-01T15:45:51.876Z",
+        "localTimestamp": "2017-05-01T08:45:51.876-07:00",
+        "id": "f:622749630322482883",
+        "channelId": "msteams",
+        "serviceUrl": "https://smba.trafficmanager.net/amer-client-ss.msg/",
+        "from": {
+            "id": "29:1C7dbRrC_5yzN1RGtZIrcWT0xz88KPGP9sxdpVpV8sODlgPHeQE9RqQ02hnpuKzy6zZ-AaZx6swUOMj_Dsdse3TQ4sIaeebbFBF-VgjJy_nY",
+            "name": "Larry Jin",
+            "aadObjectId": "cd723fa0-0591-416a-9290-e93ecf3a9b92"
+        },
+        "conversation": {
+            "id": "19:skypespaces_8198cfe0dd2647ae91930f0974768a40@thread.skype"
+        },
+        "recipient": {
+            "id": "28:b4922ea1-5315-4fd0-9b21-d941ab06e39f",
+            "name": "TheComposeExtensionDev"
+        },
+        "entities": [{
+            "type": "clientInfo",
+            "country": "US",
+            "platform": "Windows"
+        }]
+    },
+    {
+        "name": "composeExtension/query",
+        "value": {
+            "commandId": "search",
+            "parameters": [{
+                "name": "initialRun",
+                "value": true
+            }],
+            "queryOptions": {
+                "skip": 0,
+                "count": 25
+            }
+        },
+        "type": "invoke",
+        "timestamp": "2017-05-01T15:45:51.876Z",
+        "localTimestamp": "2017-05-01T08:45:51.876-07:00",
+        "id": "f:622749630322482883",
+        "channelId": "msteams",
+        "serviceUrl": "https://smba.trafficmanager.net/amer-client-ss.msg/",
+        "from": {
+            "id": "29:1C7dbRrC_5yzN1RGtZIrcWT0xz88KPGP9sxdpVpV8sODlgPHeQE9RqQ02hnpuKzy6zZ-AaZx6swUOMj_Dsdse3TQ4sIaeebbFBF-VgjJy_nY",
+            "name": "Larry Jin",
+            "aadObjectId": "cd723fa0-0591-416a-9290-e93ecf3a9b92"
+        },
+        "conversation": {
+            "id": "19:skypespaces_8198cfe0dd2647ae91930f0974768a40@thread.skype"
+        },
+        "recipient": {
+            "id": "28:b4922ea1-5315-4fd0-9b21-d941ab06e39f",
+            "name": "TheComposeExtensionDev"
+        },
+        "entities": [{
+            "type": "clientInfo",
+            "country": "US",
+            "platform": "Windows"
+        }]
+    }
+]
