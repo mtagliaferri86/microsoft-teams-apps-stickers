@@ -38,13 +38,15 @@ namespace StickersTemplate.Config
         /// <inheritdoc/>
         public Uri ConfigUri => this.UriValue("ConfigUri");
 
-        /// <summary>
-        /// Parses a config value into a <see cref="string"/>.
-        /// </summary>
-        /// <param name="configName">The name of the config value.</param>
-        /// <param name="optional">Whether this parameter is optional or not.</param>
-        /// <returns>A parsed <see cref="string"/>.</returns>
-        private string StringValue(string configName, bool optional = false)
+        public int CachedStickerSetTTLMins => this.IntValue("CachedStickerSetTTLMins");
+
+		/// <summary>
+		/// Parses a config value into a <see cref="string"/>.
+		/// </summary>
+		/// <param name="configName">The name of the config value.</param>
+		/// <param name="optional">Whether this parameter is optional or not.</param>
+		/// <returns>A parsed <see cref="string"/>.</returns>
+		private string StringValue(string configName, bool optional = false)
         {
             var value = this.config[configName];
             if (value == null)
@@ -62,6 +64,33 @@ namespace StickersTemplate.Config
 
             return value;
         }
+
+        /// <summary>
+		/// Parses a config value into an <see cref="int"/>.
+		/// </summary>
+		/// <param name="configName">The name of the config value.</param>
+		/// <param name="optional">Whether this parameter is optional or not.</param>
+		/// <returns>A parsed <see cref="string"/>.</returns>
+		private int IntValue(string configName, bool optional = false, int defaultValue = 0)
+        {
+            var value = this.config[configName];
+            int intValue = defaultValue;
+            if (value == null || !int.TryParse(value, out intValue))
+            {
+                if (!optional)
+                {
+                    this.logger.LogError($"Config parameter '{configName}' not provided or cannot be parsed as int.");
+                    throw new InvalidOperationException($"Config parameter '{configName}' is required and must be parsable as int.");
+                }
+                else
+                {
+                    this.logger.LogInformation($"Config parameter '{configName}' not provided or cannot be parsed as int. Returning defaultValue '{defaultValue}'.");
+                }
+            }
+
+            return intValue;
+        }
+
 
         /// <summary>
         /// Parses a config value into a <see cref="Uri"/>.

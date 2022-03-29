@@ -24,7 +24,8 @@ namespace StickersTemplate.Providers
     {
         private static readonly StickerSet DefaultStickerSet = new StickerSet("default", new Sticker[0]);
         private static readonly string StickerSetName = "Stickers";
-        private static StickerSet CachedStickerSet;
+        private static StickerSet cachedStickerSet;
+        private static DateTimeOffset stickerSetCachedAt = DateTimeOffset.MinValue;
         private static object lockObject = new object();
         private readonly ILogger logger;
         private readonly ISettings settings;
@@ -35,7 +36,7 @@ namespace StickersTemplate.Providers
 		/// </summary>
 		/// <param name="logger">The <see cref="ILogger"/>.</param>
 		/// <param name="settings">The <see cref="ISettings"/>.</param>
-		/// <param name="clientFactory"></param>
+		/// <param name="clientFactory">The <see cref="IHttpClientFactory"/>.</param>
 		public StickerSetRepository(ILogger<StickerSetRepository> logger, ISettings settings, IHttpClientFactory clientFactory)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
@@ -50,10 +51,10 @@ namespace StickersTemplate.Providers
             {
 				lock (lockObject)
 				{
-                    if (CachedStickerSet != null)
+                    if (cachedStickerSet != null && (DateTimeOffset.UtcNow - stickerSetCachedAt).TotalMinutes < this.settings.CachedStickerSetTTLMins)
                     {
                         this.logger.LogInformation("Returning cached StickerSet");
-                        return CachedStickerSet;
+                        return cachedStickerSet;
                     }
                 }
                 
@@ -81,10 +82,11 @@ namespace StickersTemplate.Providers
 
                         lock (lockObject)
                         {
-                            CachedStickerSet = new StickerSet(StickerSetName, stickers);
+                            cachedStickerSet = new StickerSet(StickerSetName, stickers);
+                            stickerSetCachedAt = DateTimeOffset.UtcNow;
                         }
 
-                        return CachedStickerSet;
+                        return cachedStickerSet;
 					}
 					catch (JsonException e)
 					{

@@ -22,5 +22,10 @@ namespace StickersTemplate.Interfaces
         /// Gets the config uri for the Sticker set.
         /// </summary>
         Uri ConfigUri { get; }
+
+        /// <summary>
+        /// Gets the TTL for the CachedStickerSet
+        /// </summary>
+        int CachedStickerSetTTLMins { get; }
     }
 }
