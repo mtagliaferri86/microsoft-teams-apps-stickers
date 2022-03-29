@@ -11,7 +11,7 @@ namespace StickersTemplate.Providers
     using System.Net.Http;
     using System.Threading;
     using System.Threading.Tasks;
-    using Microsoft.Extensions.Logging;
+	using Microsoft.Extensions.Logging;
     using Newtonsoft.Json;
     using StickersTemplate.Interfaces;
     using StickersTemplate.Models;
@@ -23,7 +23,9 @@ namespace StickersTemplate.Providers
     public class StickerSetRepository : IStickerSetRepository
     {
         private static readonly StickerSet DefaultStickerSet = new StickerSet("default", new Sticker[0]);
-
+        private static readonly string StickerSetName = "Stickers";
+        private static StickerSet CachedStickerSet;
+        private static object lockObject = new object();
         private readonly ILogger logger;
         private readonly ISettings settings;
         private readonly IHttpClientFactory httpClientFactory;
@@ -46,6 +48,15 @@ namespace StickersTemplate.Providers
         {
             using (var scope = this.logger.BeginScope($"{nameof(StickerSetRepository)}.{nameof(this.FetchStickerSetAsync)}"))
             {
+				lock (lockObject)
+				{
+                    if (CachedStickerSet != null)
+                    {
+                        this.logger.LogInformation("Returning cached StickerSet");
+                        return CachedStickerSet;
+                    }
+                }
+                
                 var configUri = this.settings.ConfigUri;
                 if (configUri == null)
                 {
@@ -67,7 +78,13 @@ namespace StickersTemplate.Providers
 						var responseContent = await response.Content.ReadAsStringAsync();
 						var stickerConfig = JsonConvert.DeserializeObject<StickerConfigDTO>(responseContent);
 						var stickers = stickerConfig?.Images?.Select(image => new Sticker(image.Name, new Uri(image.ImageUri), image.Keywords)).ToArray();
-						return new StickerSet("Stickers", stickers);
+
+                        lock (lockObject)
+                        {
+                            CachedStickerSet = new StickerSet(StickerSetName, stickers);
+                        }
+
+                        return CachedStickerSet;
 					}
 					catch (JsonException e)
 					{
