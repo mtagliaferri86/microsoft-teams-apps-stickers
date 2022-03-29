@@ -176,7 +176,7 @@ namespace StickersTemplate
         {
             if (req.Headers == null || !req.Headers.TryGetValue("Authorization", out var authHeaders) || authHeaders.Count < 1)
             {
-                throw new UnauthorizedAccessException();
+                return string.Empty;
             }
 
             return authHeaders[0];
