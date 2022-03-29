@@ -36,7 +36,6 @@ namespace StickersTemplate
     /// </summary>
     public class MessagesHttpFunction
     {
-        private static HttpClient httpClient = new HttpClient();
         private readonly TelemetryClient telemetryClient;
         private readonly ISettings settings;
         private readonly IStickerSetRepository stickerSetRepository;
@@ -56,11 +55,11 @@ namespace StickersTemplate
         [ExcludeFromCodeCoverage]
         public MessagesHttpFunction(
             TelemetryConfiguration telemetryConfiguration,
-            ISettings settings = null,
-            IStickerSetRepository stickerSetRepository = null,
-            IStickerSetIndexer stickerSetIndexer = null,
-            ICredentialProvider credentialProvider = null,
-            IChannelProvider channelProvider = null)
+            ISettings settings,
+            IStickerSetRepository stickerSetRepository,
+            IStickerSetIndexer stickerSetIndexer,
+            ICredentialProvider credentialProvider,
+            IChannelProvider channelProvider)
         {
             this.telemetryClient = new TelemetryClient(telemetryConfiguration);
             this.settings = settings;
@@ -80,8 +79,7 @@ namespace StickersTemplate
         [FunctionName("messages")]
         public async Task<IActionResult> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = null)] HttpRequest req,
-            ILogger logger,
-            ExecutionContext context)
+            ILogger logger)
         {
             if (logger == null)
             {
@@ -95,19 +93,7 @@ namespace StickersTemplate
                     throw new ArgumentNullException(nameof(req));
                 }
 
-                if (context == null)
-                {
-                    throw new ArgumentNullException(nameof(context));
-                }
-
                 logger.LogInformation("Messages function received a request.");
-
-                // Use the configured service for tests or create ones to use.
-                ISettings settings = this.settings ?? new Settings(logger, context);
-                IStickerSetRepository stickerSetRepository = this.stickerSetRepository ?? new StickerSetRepository(logger, settings);
-                IStickerSetIndexer stickerSetIndexer = this.stickerSetIndexer ?? new StickerSetIndexer(logger);
-                ICredentialProvider credentialProvider = this.credentialProvider ?? new SimpleCredentialProvider(settings.MicrosoftAppId, null);
-                IChannelProvider channelProvider = this.channelProvider ?? new SimpleChannelProvider();
 
                 // Parse the incoming activity and authenticate the request
                 Activity activity;
@@ -162,7 +148,7 @@ namespace StickersTemplate
                 }
 
                 // Find matching stickers
-                var stickerSet = await stickerSetRepository.FetchStickerSetAsync(httpClient);
+                var stickerSet = await stickerSetRepository.FetchStickerSetAsync();
                 await stickerSetIndexer.IndexStickerSetAsync(stickerSet);
                 var stickers = await stickerSetIndexer.FindStickersByQuery(query, skip, count);
 

@@ -28,7 +28,7 @@ namespace StickersTemplate.Providers
         /// Initializes a new instance of the <see cref="StickerSetIndexer"/> class.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/>.</param>
-        public StickerSetIndexer(ILogger logger)
+        public StickerSetIndexer(ILogger<StickerSetIndexer> logger)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }

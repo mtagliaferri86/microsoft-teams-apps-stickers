@@ -22,6 +22,6 @@ namespace StickersTemplate.Interfaces
         /// <param name="httpClient"> httpclient</param>
         /// <param name="cancellationToken">A <see cref="CancellationToken"/>.</param>
         /// <returns>The resulting <see cref="StickerSet"/> if one was found. Null otherwise.</returns>
-        Task<StickerSet> FetchStickerSetAsync(HttpClient httpClient, CancellationToken cancellationToken = default(CancellationToken));
+        Task<StickerSet> FetchStickerSetAsync(CancellationToken cancellationToken = default(CancellationToken));
     }
 }

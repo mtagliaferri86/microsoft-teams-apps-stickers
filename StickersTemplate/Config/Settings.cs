@@ -17,7 +17,7 @@ namespace StickersTemplate.Config
     /// </summary>
     public class Settings : ISettings
     {
-        private readonly IConfigurationRoot config;
+        private readonly IConfiguration config;
         private readonly ILogger logger;
 
         /// <summary>
@@ -25,20 +25,11 @@ namespace StickersTemplate.Config
         /// </summary>
         /// <param name="logger">The <see cref="ILogger"/>.</param>
         /// <param name="context">The <see cref="ExecutionContext"/>.</param>
-        public Settings(ILogger logger, ExecutionContext context)
+        public Settings(ILogger<Settings> logger, IConfiguration config)
         {
             this.logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-            if (context == null)
-            {
-                throw new ArgumentNullException(nameof(context));
-            }
-
-            this.config = new ConfigurationBuilder()
-                .SetBasePath(context.FunctionAppDirectory)
-                .AddJsonFile("local.settings.json", optional: true, reloadOnChange: true)
-                .AddEnvironmentVariables()
-                .Build();
+            this.config = config ?? throw new ArgumentNullException(nameof(config));
         }
 
         /// <inheritdoc/>
