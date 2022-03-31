@@ -18,9 +18,9 @@ namespace StickersTemplate
         public override void Configure(IFunctionsHostBuilder builder)
         {
             builder.Services.AddHttpClient();
-            builder.Services.AddSingleton<ISettings,Settings>();
-            builder.Services.AddSingleton<IStickerSetRepository,StickerSetRepository>();
-            builder.Services.AddSingleton<IStickerSetIndexer,StickerSetIndexer>();
+            builder.Services.AddSingleton<ISettings, Settings>();
+            builder.Services.AddSingleton<IStickerSetRepository, StickerSetRepository>();
+            builder.Services.AddTransient<IStickerSetIndexer, StickerSetIndexer>();
             builder.Services.AddSingleton<ICredentialProvider>(sp =>
             {
                 ISettings settings = sp.GetRequiredService<ISettings>();
